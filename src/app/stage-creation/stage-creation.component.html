@@ -1,0 +1,59 @@
+<main class="flex flex-grow">
+  <section id="formula" class="flex flex-col w-full">
+    <h2
+      class="w-full my-10 mt-0 mb-2 text-4xl font-medium leading-tight text-center"
+    >
+      Choisissez une répartition des Poules
+    </h2>
+
+    <form
+      [formGroup]="checkoutFormFormula"
+      id="formules"
+      class="flex flex-col justify-center flex-grow w-full h-1/2"
+      method="POST"
+      (ngSubmit)="validateFormula()"
+    >
+      <fieldset
+        form="formules"
+        class="flex flex-wrap flex-grow min-h-[40vh] items-center justify-center content-center w-full p-6"
+      >
+        <legend class="absolute invisible">
+          liste des proposition de répartition
+        </legend>
+        <div
+          *ngFor="let distr of formules; let i = index"
+          class="flex-grow p-1 mx-3 my-2 bg-gray-200 rounded-xl min-w-fit"
+        >
+          <input
+            id="f{{ i }}"
+            type="radio"
+            name="formulaIndex"
+            class="absolute h-0 peer"
+            formControlName="formulaIndex"
+            [value]="i"
+            [checked]="i == 0"
+          />
+          <label
+            for="f{{ i }}"
+            class="flex flex-wrap items-center justify-center p-2 cursor-pointer select-none rounded-xl hover:outline-cyan-500 hover:outline hover:outline-4 peer-checked:bg-blue-600 peer-checked:font-bold peer-checked:text-white"
+          >
+            <p
+              *ngFor="let pouleSet of toArray(distr); let last = last"
+              class="text-center"
+            >
+              {{ pouleSet.size }} x {{ pouleSet.count }}
+              <ng-container *ngIf="!last">,&nbsp; </ng-container>
+            </p>
+          </label>
+        </div>
+      </fieldset>
+      <div class="w-full h-16"></div>
+      <input
+        type="submit"
+        class="block px-5 py-3 m-3 font-bold text-center text-white bg-blue-600 cursor-pointer select-none hover:outline-cyan-500 hover:outline hover:outline-4 active:bg-blue-400 active:text-black focus:outline-cyan-500 focus:outline focus:outline-4 rounded-xl"
+        value="Valider la formule"
+      />
+    </form>
+    <div class="w-full"></div>
+  </section>
+</main>
