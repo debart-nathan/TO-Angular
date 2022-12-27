@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { delay, timeout } from 'rxjs';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-stage-creation',
@@ -79,5 +83,16 @@ export class StageCreationComponent {
       key,
       ...answers[key],
     }));
+  }
+
+  drop(event: CdkDragDrop<number[], any, any>): void {
+    let currentIndex: number = event.currentIndex;
+    if (currentIndex>=event.container.data.length){
+      currentIndex=event.container.data.length-1
+    }
+    let oldtarget = event.previousContainer.data[event.previousIndex];
+    event.previousContainer.data[event.previousIndex] =
+      event.container.data[currentIndex];
+    event.container.data[currentIndex] = oldtarget;
   }
 }

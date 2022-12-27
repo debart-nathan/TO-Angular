@@ -78,15 +78,21 @@
     </button>
     <span
       *ngIf="isReadyPools; else poolsNotReady"
+      cdkDropListGroup
       class="flex mt-14 flex-wrap justify-center flex-grow w-full"
     >
       <div
         *ngFor="let pool of pools; let i = index"
-        class="py-3 text-lg px-1 m-3 font-bold basis-1 text-center h-fit bg-gray-100 rounded-xl min-w-fit"
+        cdkDropList
+        [cdkDropListData]="pool"
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="drop($event)"
+        class="py-3 text-lg px-1 m-3 font-bold basis-1 text-center select-none h-fit bg-gray-100 rounded-xl min-w-fit"
       >
         Poule {{ i + 1 }}:
         <div
           *ngFor="let teamIn of pool"
+          cdkDrag
           class="text-left my-0.5 text-white bg-blue-600 px-11 m-0 cursor-pointer select-none w-full h-full hover:outline-cyan-500 hover:outline hover:outline-2"
         >
           {{ teams[teamIn].name }}

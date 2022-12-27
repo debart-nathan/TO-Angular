@@ -1,1 +1,15 @@
-input::-webkit-inner-spin-button { margin-left: 0.75rem; } 
+input::-webkit-inner-spin-button {
+  margin-left: 0.75rem;
+}
+
+.cdk-drag-preview {
+  font-weight: bold;
+  font-size: 1.125rem /* 18px */;
+  line-height: 1.75rem /* 28px */;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
