@@ -1,28 +1,30 @@
-<main class="flex flex-grow">
-  <section id="formula" class="flex flex-col w-full">
+<main class="flex flex-col flex-grow">
+  <div class="h-5"></div>
+
+  <section id="formula" class="flex flex-col min-h-[40vh] w-full">
     <h2
-      class="w-full my-10 mt-0 mb-2 text-4xl font-medium leading-tight text-center"
+      class="flex w-full my-10 mt-0 mx-3 mb-2 text-3xl whitespace-normal font-medium leading-tight text-center"
     >
       Choisissez une répartition des Poules
     </h2>
 
     <form
       [formGroup]="checkoutFormFormula"
-      id="formules"
-      class="flex flex-col justify-center flex-grow w-full h-1/2"
+      id="formulesform"
+      class="flex flex-col justify-center items-center flex-grow w-full h-1/2"
       method="POST"
       (ngSubmit)="validateFormula()"
     >
       <fieldset
         form="formules"
-        class="flex flex-wrap flex-grow min-h-[40vh] items-center justify-center content-center w-full p-6"
+        class="flex flex-grow flex-wrap mt-14 justify-center w-full h-full p-6"
       >
         <legend class="absolute invisible">
           liste des proposition de répartition
         </legend>
         <div
           *ngFor="let distr of formules; let i = index"
-          class="flex-grow p-1 mx-3 my-2 bg-gray-200 rounded-xl min-w-fit"
+          class="flex-grow p-1 mx-3 my-2 bg-gray-100 rounded-xl min-w-fit"
         >
           <input
             id="f{{ i }}"
@@ -50,10 +52,125 @@
       <div class="w-full h-16"></div>
       <input
         type="submit"
-        class="block px-5 py-3 m-3 font-bold text-center text-white bg-blue-600 cursor-pointer select-none hover:outline-cyan-500 hover:outline hover:outline-4 active:bg-blue-400 active:text-black focus:outline-cyan-500 focus:outline focus:outline-4 rounded-xl"
-        value="Valider la formule"
+        class="block flex-wrap min-w-fit px-5 py-3 m-3 whitespace-normal font-bold text-center text-white bg-blue-600 cursor-pointer select-none hover:outline-cyan-500 hover:outline hover:outline-4 active:bg-blue-400 active:text-black focus:outline-cyan-500 focus:outline focus:outline-4 rounded-xl w-[90vw]"
+        value="Valider la formule de répartition"
       />
     </form>
     <div class="w-full"></div>
+  </section>
+  <div class="h-10"></div>
+  <section
+    id="distribution"
+    class="flex min-h-[80vh] flex-col w-full"
+    *ngIf="isChosenFormula"
+  >
+    <h2
+      class="flex w-full my-10 mx-3 mt-0 mb-2 whitespace-normal text-3xl font-medium leading-tight text-center"
+    >
+      Choisissez une distribution des équipes
+    </h2>
+
+    <button
+      class="block px-5 py-3 m-3 font-bold text-center text-white bg-blue-600 cursor-pointer select-none hover:outline-cyan-500 hover:outline hover:outline-4 active:bg-blue-400 active:text-black focus:outline-cyan-500 focus:outline focus:outline-4 rounded-xl w-fit"
+      (click)="loadDefaultRepart()"
+    >
+      Distribution par défaut
+    </button>
+    <span
+      *ngIf="isReadyPools; else poolsNotReady"
+      class="flex mt-14 flex-wrap justify-center flex-grow w-full"
+    >
+      <div
+        *ngFor="let pool of pools; let i = index"
+        class="py-3 text-lg px-1 m-3 font-bold basis-1 text-center h-fit bg-gray-100 rounded-xl min-w-fit"
+      >
+        Poule {{ i + 1 }}:
+        <div
+          *ngFor="let teamIn of pool"
+          class="text-left my-0.5 text-white bg-blue-600 px-11 m-0 cursor-pointer select-none w-full h-full hover:outline-cyan-500 hover:outline hover:outline-2"
+        >
+          {{ teams[teamIn].name }}
+        </div>
+      </div>
+    </span>
+
+    <ng-template #poolsNotReady>
+      <div class="flex items-center justify-center h-[40vh]">
+        <p
+          class="py-3 m-3 font-bold text-center text-red-700 bg-gray-100 px-11 outline outline-8 outline-red-600 rounded-xl w-fit"
+        >
+          Veuillez patienter pendent que nous générons la distribution par
+          défaut ...
+        </p>
+      </div>
+    </ng-template>
+  </section>
+  <div class="h-10"></div>
+  <section
+    id="stage-proprieties"
+    class="flex items-center flex-col min-h-[40vh] w-full"
+  >
+    <h2
+      class="w-full my-10 mt-0 mb-2 text-3xl font-medium leading-tight text-center"
+    >
+      Quelle serons les propriété de vos Poules?
+    </h2>
+    <form
+      [formGroup]="checkoutFormPropr"
+      id="matchFrom"
+      class="flex flex-col items-center justify-center flex-grow w-full"
+      method="POST"
+      (ngSubmit)="sendStage()"
+    >
+      <fieldset class="flex flex-col justify-center flex-grow w-[90vw]">
+        <legend>Poules :</legend>
+        <label
+          class="flex justify-between w-full py-2 pl-3 font-semibold text-left text-white bg-blue-600 min-h-fit rounded-xl"
+        >
+          Top Cut
+          <input
+            type="number"
+            class="flex-grow ml-3 min-w-[50%] max-w-[50%] -my-2 bg-gray-100 rounded-r-xl text-black text-right pr-2"
+            name="topCut"
+            formControlName="topCut"
+            min="1"
+          />
+        </label>
+      </fieldset>
+
+      <fieldset class="flex flex-col justify-center flex-grow w-[90vw]">
+        <legend>Matches :</legend>
+        <label
+          class="flex justify-between w-full py-2 pl-3 font-semibold text-left text-white bg-blue-600 min-h-fit rounded-xl"
+        >
+          Nombre de Rounds
+          <input
+            type="number"
+            class="flex-grow ml-3 min-w-[50%] max-w-[50%] -my-2 bg-gray-100 rounded-r-xl text-black text-right pr-2"
+            name="nR"
+            formControlName="nR"
+            min="1"
+          />
+        </label>
+        <br />
+        <label
+          class="flex justify-between w-full py-2 pl-3 font-semibold text-left text-white bg-blue-600 min-h-fit rounded-xl"
+        >
+          Nombre de Points pour gagner
+          <input
+            type="number"
+            class="flex-grow min-w-[50%] max-w-[50%] ml-3 -my-2 bg-gray-100 rounded-r-xl text-black text-right pr-2"
+            name="pWin"
+            formControlName="pWin"
+            min="1"
+          />
+        </label>
+      </fieldset>
+      <input
+        type="submit"
+        class="block px-5 py-3 m-3 font-bold whitespace-normal text-center text-white bg-blue-600 cursor-pointer select-none hover:outline-cyan-500 hover:outline hover:outline-4 active:bg-blue-400 active:text-black focus:outline-cyan-500 focus:outline focus:outline-4 rounded-xl w-[90vw]"
+        value="Créer la Phase"
+      />
+    </form>
   </section>
 </main>
