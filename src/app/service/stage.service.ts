@@ -68,20 +68,18 @@ export class StageService {
 
     //true if there is no more team that can be attributed
     let noMoreTeams = false;
-    console.log(formula);
     //for all new pool types
     formula.forEach((pooltype) => {
-      console.log(pooltype);
+
       //for all new pool in the new pool type
       for (let poolnum = 0; poolnum < pooltype.count; poolnum++) {
-        console.log('poolnum', poolnum);
+
         let pool: { oldPool_num: number; oldTeam_num: number }[] = Array<{
           oldPool_num: number;
           oldTeam_num: number;
         }>();
         //for all teams in the new pools
         for (let teamnum = 0; teamnum < pooltype.size; teamnum++) {
-          console.log('teamnum', teamnum);
           //if no more team can be attributed but the new pools aren't full
           if (noMoreTeams) {
             throw 'ERROR: Not enough teams for the distribution';
@@ -99,9 +97,9 @@ export class StageService {
               oldTeam_num += 1;
             }
             //if you passed all the old pools without finding a team
-            console.log(this.registeredTeams.length, '<=', changePoolCount);
+
             if (changePoolCount >= this.registeredTeams.length) {
-              console.log("true");
+              noMoreTeams =true;
               break;
             }
             changePoolCount++;
@@ -109,11 +107,10 @@ export class StageService {
           } while (this.registeredTeams[oldPool_num].length <= oldTeam_num);
         }
         distrib.push(pool);
-        console.log('push pool:', poolnum, pool);
       }
     });
 
-    if (noMoreTeams) {
+    if (!noMoreTeams) {
       throw 'ERROR: Not All teams where added in the distribution';
     }
 
