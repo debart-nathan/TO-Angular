@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { StageService } from '../service/stage.service';
+
 
 @Component({
   selector: 'app-stage-creation',
@@ -20,9 +18,9 @@ export class StageCreationComponent {
   chosenFormulaIndex: number = -1;
   isChosenFormula: boolean = false;
 
-  teams: Array<{ id: number; name: string }>;
+  teams: { id: number; name: string }[][];
   isReadyPools: boolean = false;
-  pools: Array<Array<number>> | undefined;
+  pools: { oldPool_num: number; oldTeam_num: number }[][] | undefined;
 
   checkoutFormPropr = this.formBuilder.group({
     topCut: 1,
@@ -32,20 +30,12 @@ export class StageCreationComponent {
 
   propr: { topCut: number; matches: { nR: number; pWin: number } } | undefined;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.teams = [
-      { id: 1, name: 'test1' },
-      { id: 2, name: 'test2' },
-      { id: 3, name: 'test3' },
-    ];
-    this.formules = [
-      [{ size: 1, count: 3 }],
-      [
-        { size: 2, count: 1 },
-        { size: 1, count: 1 },
-      ],
-      [{ size: 3, count: 1 }],
-    ];
+  constructor(
+    private formBuilder: FormBuilder,
+    private stageService: StageService
+  ) {
+    this.teams = this.stageService.registeredTeams
+    this.formules = this.stageService.generateFormules(this.teams.flat(1).length);
   }
 
   validateFormula(): void {
@@ -70,8 +60,15 @@ export class StageCreationComponent {
       return;
     }
     this.isReadyPools = false;
+    let distrib = await this.stageService.createDistribution(
+      this.formules[this.chosenFormulaIndex]
+    );
+    if (distrib == null) {
+      //toDO launch warning could not find the teams;
+      return;
+    }
 
-    this.pools = [[0, 2], [1]];
+    this.pools = distrib;
 
     this.isReadyPools = true;
   }
@@ -85,10 +82,10 @@ export class StageCreationComponent {
     }));
   }
 
-  drop(event: CdkDragDrop<number[], any, any>): void {
+  drop(event: CdkDragDrop<{ oldPool_num: number; oldTeam_num: number }[], any, any>): void {
     let currentIndex: number = event.currentIndex;
-    if (currentIndex>=event.container.data.length){
-      currentIndex=event.container.data.length-1
+    if (currentIndex >= event.container.data.length) {
+      currentIndex = event.container.data.length - 1;
     }
     let oldtarget = event.previousContainer.data[event.previousIndex];
     event.previousContainer.data[event.previousIndex] =
