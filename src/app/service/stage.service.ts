@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
 
+import { UtilityFuncService } from './utility-func.service';
+
 @Injectable({
   providedIn: 'root',
 })
 export class StageService {
   registeredTeams: { id: number; name: string }[][];
 
-  constructor() {
+  constructor(private utilityFunc:UtilityFuncService) {
     this.registeredTeams = [
       [
-        { id: 1, name: 'test1' },
-        { id: 2, name: 'test2' },
-        { id: 3, name: 'test3' },
+        { id: 1, name: 'test1-1' },
+        { id: 2, name: 'test1-2' },
+        { id: 3, name: 'test1-3' },
       ],
+      [
+        { id: 4, name: 'test2-1' },
+        { id: 5, name: 'test2-2' },
+        { id: 6, name: 'test2-3' },
+      ],
+
     ];
+    this.registeredTeams.forEach(pool=>{
+      utilityFunc.shuffle(pool);
+    })
+    
   }
 
   generateFormules(
