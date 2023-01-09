@@ -92,11 +92,12 @@
         Poule {{ i + 1 }}:
         <div
           *ngFor="let teamIn of pool"
+          [title]="'id: '+teams[teamIn.oldPool_num][teamIn.oldTeam_num].id"
           cdkDrag
           class="text-left my-0.5 text-white bg-blue-600 px-11 m-0 cursor-pointer select-none w-full h-full hover:outline-cyan-500 hover:outline hover:outline-2"
         >
           {{ teams[teamIn.oldPool_num][teamIn.oldTeam_num].name }}
-          <!--TODO add display id on hover-->
+
         </div>
       </div>
     </span>
