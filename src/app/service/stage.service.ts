@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 
 import { UtilityFuncService } from './utility-func.service';
+import { PoolService } from './pool.service';
+import { MatchService } from './match.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StageService {
   registeredTeams: { id: number; name: string }[][];
+  tournId: number;
 
-  constructor(private utilityFunc:UtilityFuncService) {
+  constructor(private utilityFuncS: UtilityFuncService) {
+    //(tournid in the url)
+    this.tournId=0;
+    //TODO check last stage of tourn finished
+    
+    //TODO get Team for next stage of tourn 
     this.registeredTeams = [
       [
         { id: 1, name: 'test1-1' },
@@ -20,12 +28,10 @@ export class StageService {
         { id: 5, name: 'test2-2' },
         { id: 6, name: 'test2-3' },
       ],
-
     ];
-    this.registeredTeams.forEach(pool=>{
-      utilityFunc.shuffle(pool);
-    })
-    
+    this.registeredTeams.forEach((pool) => {
+      utilityFuncS.shuffle(pool);
+    });
   }
 
   generateFormules(
@@ -82,10 +88,8 @@ export class StageService {
     let noMoreTeams = false;
     //for all new pool types
     formula.forEach((pooltype) => {
-
       //for all new pool in the new pool type
       for (let poolnum = 0; poolnum < pooltype.count; poolnum++) {
-
         let pool: { oldPool_num: number; oldTeam_num: number }[] = Array<{
           oldPool_num: number;
           oldTeam_num: number;
@@ -111,7 +115,7 @@ export class StageService {
             //if you passed all the old pools without finding a team
 
             if (changePoolCount >= this.registeredTeams.length) {
-              noMoreTeams =true;
+              noMoreTeams = true;
               break;
             }
             changePoolCount++;
@@ -127,5 +131,34 @@ export class StageService {
     }
 
     return distrib;
+  }
+
+  createStage(
+    proprieties: Partial<{
+      topCut: number | null;
+      nR: number | null;
+      pWin: number | null;
+    }>,
+    pools: { oldPool_num: number; oldTeam_num: number }[][] | undefined
+  ) {
+    //TODO add auth check
+    //create pools and associated matches
+    pools?.forEach(pool=>{
+      let poolId: number = PoolService.createPool(
+        this.tournId,
+        proprieties.topCut
+      );
+      for(let i=0;i<pool.length-1;i++){
+        for(let j=i;j<pool.length;j++){
+          const teamAid=this.registeredTeams[pool[i].oldPool_num][pool[i].oldTeam_num].id;
+          const teamBid=this.registeredTeams[pool[j].oldPool_num][pool[j].oldTeam_num].id;
+          MatchService.createMatch(poolId,teamAid,teamBid,proprieties.nR,proprieties.pWin)
+        }
+      }
+
+    });
+    
+
+    //TODO redirect to userPage
   }
 }

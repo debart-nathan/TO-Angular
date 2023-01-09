@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { StageService } from '../service/stage.service';
-
 
 @Component({
   selector: 'app-stage-creation',
@@ -23,9 +22,9 @@ export class StageCreationComponent {
   pools: { oldPool_num: number; oldTeam_num: number }[][] | undefined;
 
   checkoutFormPropr = this.formBuilder.group({
-    topCut: 1,
-    nR: 1,
-    pWin: 1,
+    topCut: [1,Validators.required],
+    nR: [1,Validators.required],
+    pWin: [1,Validators.required],
   });
 
   propr: { topCut: number; matches: { nR: number; pWin: number } } | undefined;
@@ -34,8 +33,10 @@ export class StageCreationComponent {
     private formBuilder: FormBuilder,
     private stageService: StageService
   ) {
-    this.teams = this.stageService.registeredTeams
-    this.formules = this.stageService.generateFormules(this.teams.flat(1).length);
+    this.teams = this.stageService.registeredTeams;
+    this.formules = this.stageService.generateFormules(
+      this.teams.flat(1).length
+    );
   }
 
   validateFormula(): void {
@@ -64,7 +65,7 @@ export class StageCreationComponent {
       this.formules[this.chosenFormulaIndex]
     );
     if (distrib == null) {
-      //toDO launch warning could not find the teams;
+      //TODO launch warning could not find the teams;
       return;
     }
 
@@ -73,7 +74,19 @@ export class StageCreationComponent {
     this.isReadyPools = true;
   }
 
-  sendStage(): void {}
+  sendStage(): void {
+    if (!this.isReadyPools){
+      //TODO send message pool distribution not set
+      return;
+    }
+    if(this.checkoutFormPropr.valid){
+      //TODO send message pool proprieties not valid
+      return;
+    }
+    const proprieties = this.checkoutFormPropr.value
+    
+    this.stageService.createStage(proprieties,this.pools)
+  }
 
   toArray(answers: any) {
     return Object.keys(answers).map((key) => ({
@@ -82,7 +95,9 @@ export class StageCreationComponent {
     }));
   }
 
-  drop(event: CdkDragDrop<{ oldPool_num: number; oldTeam_num: number }[], any, any>): void {
+  drop(
+    event: CdkDragDrop<{ oldPool_num: number; oldTeam_num: number }[], any, any>
+  ): void {
     let currentIndex: number = event.currentIndex;
     if (currentIndex >= event.container.data.length) {
       currentIndex = event.container.data.length - 1;

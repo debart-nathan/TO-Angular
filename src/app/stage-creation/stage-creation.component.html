@@ -96,6 +96,7 @@
           class="text-left my-0.5 text-white bg-blue-600 px-11 m-0 cursor-pointer select-none w-full h-full hover:outline-cyan-500 hover:outline hover:outline-2"
         >
           {{ teams[teamIn.oldPool_num][teamIn.oldTeam_num].name }}
+          <!--TODO add display id on hover-->
         </div>
       </div>
     </span>
@@ -140,6 +141,7 @@
             name="topCut"
             formControlName="topCut"
             min="1"
+            required
           />
         </label>
       </fieldset>
@@ -156,6 +158,7 @@
             name="nR"
             formControlName="nR"
             min="1"
+            required
           />
         </label>
         <br />
@@ -169,6 +172,7 @@
             name="pWin"
             formControlName="pWin"
             min="1"
+            required
           />
         </label>
       </fieldset>
