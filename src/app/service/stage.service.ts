@@ -8,15 +8,16 @@ import { MatchService } from './match.service';
   providedIn: 'root',
 })
 export class StageService {
+  //TODO remove brut declaration and replace by apropriate request
   registeredTeams: { id: number; name: string }[][];
   tournId: number;
 
   constructor(private utilityFuncS: UtilityFuncService) {
-    //(tournid in the url)
+    //TODO set the route to get the tournId (tournid in the url)
     this.tournId=0;
-    //TODO check last stage of tourn finished
+    //TODO check last stage of tourn finished (connect to the CRUD API)
     
-    //TODO get Team for next stage of tourn 
+    //TODO get Team for next stage of tourn (connect to the CRUD API)
     this.registeredTeams = [
       [
         { id: 1, name: 'test1-1' },
