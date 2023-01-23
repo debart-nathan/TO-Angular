@@ -3,5 +3,31 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@layer base {
+  html,
+  body {
+    min-height: 100%;
+  }
+  body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+}
+@layer components {
+  .flex-center-full {
+    @apply flex justify-center items-center;
+  }
+
+  .hOutline-default :hover{
+    @apply hover:outline-cyan-500 hover:outline hover:outline-4
+  }
+
+  .fOutline-default :focus{
+    @apply focus:outline-cyan-500 focus:outline focus:outline-4
+  }
+
+  .button-primary{
+    @apply block px-5 py-3 m-3 font-bold whitespace-normal text-center text-white bg-blue-600 cursor-pointer select-none hOutline-default active:bg-blue-400 active:text-black fOutline-default rounded-xl
+  }
+
+}

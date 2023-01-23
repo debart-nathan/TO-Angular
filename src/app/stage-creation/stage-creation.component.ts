@@ -9,6 +9,7 @@ import { StageService } from '../service/stage.service';
   styleUrls: ['./stage-creation.component.scss'],
 })
 export class StageCreationComponent {
+  
   formules: Array<Array<{ size: number; count: number }>>;
   checkoutFormFormula = this.formBuilder.group({
     formulaIndex: 0,
