@@ -1,0 +1,72 @@
+<main class="flex flex-col flex-grow">
+  <div class="h-5"></div>
+
+  <section id="register" class="flex flex-col min-h-[40vh] w-full">
+    <h2
+      class="w-full my-10 mt-0 mx-3 mb-2 text-3xl whitespace-normal font-medium leading-tight text-center"
+    >
+      Inscription
+    </h2>
+    <p class="pl-5 text-lg">Choisissez une équipe a inscrire :</p>
+    <app-select-filtered
+      [options]="teamListDisplayString"
+      placeholderText="Nom d'équipe - id"
+      (selectedOption)="selectedTeam($event)"
+      class="mx-auto mt-0 mb-4 rounded-lg w-[75%] text-center h-7"
+    ></app-select-filtered>
+    <section
+      *ngIf="selectedTeamInfo != null && selectedTeamInfo != undefined"
+      class="bg-gray-100 mx-auto min-w-[75%] max-w-[90%] rounded-lg"
+    >
+      <legend
+        class="w-full bg-blue-600 font-bold whitespace-normal text-center text-white text-base h-fit py-1 rounded-t-lg mb-3"
+      >
+        Information d'Équipe
+      </legend>
+      <p>Id: {{ selectedTeamInfo.id }}</p>
+      <p>Name:{{ selectedTeamInfo.name }}</p>
+    </section>
+    <div class="flex justify-center w-full mt-4">
+      <button
+        class="button-primary max-w-[80%] w-60"
+        [disabled]="selectedTeamInfo == null || selectedTeamInfo == undefined"
+      >
+        Inscrire l'Équipe
+      </button>
+    </div>
+  </section>
+
+  <section id="registered" class="flex flex-col min-h-[40vh] w-full">
+    <h2
+      class="w-full my-10 mt-0 mx-3 mb-2 text-3xl whitespace-normal font-medium leading-tight text-center"
+    >
+      Liste des équipes inscrites
+    </h2>
+    <mat-tree
+      class="mat-elevation-z4"
+      [dataSource]="nestedDataSource"
+      [treeControl]="nestedTreeControl"
+    >
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+        {{ node.name }}
+      </mat-tree-node>
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+        <div>
+          <button mat-icon-button matTreeNodeToggle>
+            <mat-icon>
+              {{
+                nestedTreeControl.isExpanded(node)
+                  ? "expand_more"
+                  : "chevron_right"
+              }}
+            </mat-icon>
+          </button>
+          {{ node.name }}
+        </div>
+        <div class="" [class.hidden]="!nestedTreeControl.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+      </mat-nested-tree-node>
+    </mat-tree>
+  </section>
+</main>
