@@ -9,10 +9,14 @@ import { map, startWith, Observable } from 'rxjs';
 })
 export class SelectFilteredComponent {
   @Input() options!: string[];
+  @Input() placeholderText!: string;
+  @Input() class!:string;
   @Output() selectedOption = new EventEmitter<string>();
+
 
   filteredOptions!: Observable<string[]>;
   myControl: FormControl = new FormControl('');
+  
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(

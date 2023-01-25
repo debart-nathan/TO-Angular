@@ -1,8 +1,9 @@
 <input
   type="text"
-  placeholder=""
+  [placeholder]="placeholderText"
   aria-label="Number"
   matInput
+  [class]="class"
   [formControl]="myControl"
   [matAutocomplete]="auto"
 />
