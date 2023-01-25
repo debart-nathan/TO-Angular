@@ -29,5 +29,8 @@
   .button-primary{
     @apply block px-5 py-3 m-3 font-bold whitespace-normal text-center text-white bg-blue-600 cursor-pointer select-none hOutline-default active:bg-blue-400 active:text-black fOutline-default rounded-xl
   }
+  .button-primary:disabled{
+    @apply bg-blue-400 cursor-default   active:text-white
+  }
 
 }
