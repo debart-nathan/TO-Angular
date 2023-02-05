@@ -1,7 +1,6 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
+import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { UnaryFunction } from 'rxjs';
 import { TeamService } from '../service/teams.service';
 
 import { TournRegisterService } from '../service/tourn-register.service';
