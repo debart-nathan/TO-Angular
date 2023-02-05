@@ -6,6 +6,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field'
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TournInscriptionComponent } from './tourn-inscription/tourn-inscription.component';
 import { SelectFilteredComponent } from './select-filtered/select-filtered.component';
+import { EventsManagementComponent } from './events-management/events-management.component';
 
 
 @NgModule({
@@ -26,9 +30,12 @@ import { SelectFilteredComponent } from './select-filtered/select-filtered.compo
     StageCreationComponent,
     TournInscriptionComponent,
     SelectFilteredComponent,
+    EventsManagementComponent,
 
   ],
   imports: [
+    MatPaginatorModule,
+    MatTableModule,
     MatFormFieldModule,
     MatAutocompleteModule,
     MatIconModule,
@@ -40,7 +47,8 @@ import { SelectFilteredComponent } from './select-filtered/select-filtered.compo
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'stage-creation', component: StageCreationComponent },
-      { path: 'tourn-inscription', component:TournInscriptionComponent }
+      { path: 'tourn-inscription', component:TournInscriptionComponent },
+      { path: 'events-management', component: EventsManagementComponent }
     ]),
     BrowserAnimationsModule,
   ],
