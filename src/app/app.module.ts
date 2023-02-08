@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TournInscriptionComponent } from './tourn-inscription/tourn-inscription.component';
 import { SelectFilteredComponent } from './select-filtered/select-filtered.component';
 import { EventsManagementComponent } from './events-management/events-management.component';
+import { TournsManagementComponent} from './tourns-managment/tourns-managment.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { EventsManagementComponent } from './events-management/events-management
     TournInscriptionComponent,
     SelectFilteredComponent,
     EventsManagementComponent,
+    TournsManagementComponent,
 
   ],
   imports: [

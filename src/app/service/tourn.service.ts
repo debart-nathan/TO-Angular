@@ -1,31 +1,36 @@
 import { Injectable } from '@angular/core';
 
+export interface TOURN {
+  id:string,
+  name:string,
+  sport:string,
+  level:string,
+  active:boolean,
+  pools:string[]
+};
 @Injectable({
   providedIn: 'root',
 })
 export class TournService {
-  tourn : {
-    id:string,
-    name:string,
-    sport:string,
-
-  };
+  
+  tourns :TOURN[] 
 
   constructor() {
-    this.tourn = {
-      id: "3", //TODO replace by getting the id in the url
+    this.tourns = [{
+      id: "3", 
       name: "foobar",
-      sport: "something"
-    };
+      sport: "something",
+      level: "something",
+      active: true,
+      pools: []
+    }];
   }
 
-  setTourn(id:string) {}
-
-  getRegisteredTeamIdList():string[] {
-    return ["3","4"]
+  getTournInfo(idTourn: string):TOURN {
+    let tourn :TOURN|undefined =this.tourns.find(tourn=>{return tourn.id==idTourn})
+    if (tourn == undefined){
+      throw new Error("tournament undefined");
+    }
+    return tourn
   }
-
-  getPoolIdList() {}
-
-  getOpenPoolIdList() {}
 }

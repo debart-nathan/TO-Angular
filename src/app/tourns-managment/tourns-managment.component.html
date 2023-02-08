@@ -1,0 +1,131 @@
+<button class="button-primary">Créer un nouveau Tournoi</button>
+<div name="aEventL">
+  <div class="">
+    <form>
+      <input (keyup)="applyFilterActive($event.target)" placeholder="Filtre" />
+    </form>
+  </div>
+
+  <mat-table #activeTable [dataSource]="activeTournList">
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button class="w-full h-full rounded-none button-primary">Édit</button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="idTourn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> id. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sport">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        sport
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.sport }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        niveau
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.level }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        role
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.role }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    #activePaginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
+</div>
+<div name="cEventL">
+  <button class="button-primary" (click)="closedToggle = !closedToggle">
+    Montrer l'Historique
+  </button>
+  <div *ngIf="closedToggle">
+    <div class="">
+      <form>
+        <input
+          (keyup)="applyFilterActive($event.target)"
+          placeholder="Filtre"
+        />
+      </form>
+    </div>
+    <mat-table #activeTable [dataSource]="closedTournList">
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button class="w-full h-full rounded-none button-primary">
+            Édit
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="idTourn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id.
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          nom
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sport">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          sport
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.sport }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          niveau
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.level }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          role
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.role }} </mat-cell>
+      </ng-container>
+
+      
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      #activePaginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
+</div>
