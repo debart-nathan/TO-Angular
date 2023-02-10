@@ -18,10 +18,11 @@ export class TournsManagementService {
     private RoleAuthS: RoleAuthService,
     private tournS: TournService
   ) {
-    let eventIdList = RoleAuthS.getRoleEventList();
-    this.tournList = eventIdList.map((tourn) => {
-      let ev = tournS.getTournInfo(tourn.id);
-      return { ...ev, ...{ role: tourn.role } };
+    let tournIdList = RoleAuthS.getRoleTournList();
+
+    this.tournList = tournIdList.map((tourn) => {
+      let to = tournS.getTournInfo(tourn.id);
+      return { ...to, ...{ role: tourn.role } };
     });
   }
 
