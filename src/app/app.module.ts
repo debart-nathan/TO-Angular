@@ -50,7 +50,8 @@ import { TournsManagementComponent} from './tourns-managment/tourns-managment.co
     RouterModule.forRoot([
       { path: 'stage-creation', component: StageCreationComponent },
       { path: 'tourn-inscription', component:TournInscriptionComponent },
-      { path: 'events-management', component: EventsManagementComponent }
+      { path: 'events-management', component: EventsManagementComponent },
+      { path: 'tourns-management', component: TournsManagementComponent}
     ]),
     BrowserAnimationsModule,
   ],

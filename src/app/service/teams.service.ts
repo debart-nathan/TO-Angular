@@ -1,48 +1,33 @@
+import { identifierName } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { PlayerService } from './player.service';
 
+export interface TEAM {
+  id: string;
+  name: string;
+  level: string;
+  idPlayers: string[];
+}
 @Injectable({
   providedIn: 'root',
 })
 export class TeamService {
-  constructor() {}
+  teams: TEAM[];
 
-  getFullSportTeamIdList(sport: string): string[] {
-    return ['3'];
+  constructor() {
+    this.teams = [];
   }
 
-  getTeamName(id: string): string {
-    return 'foobarTeam';
+  getTeamsName(): { id: string; name: string }[] {
+    return this.teams;
   }
 
-  getTeamFullInfo(id: string): {
-    id: string;
-    name: string;
-    sport: string;
-    level: string;
-    players: {
-      id: string;
-      name: string;
-      lastname: string;
-      sport: string;
-      level: string;
-    }[];
-  } {
-    let fubarinfo = {
-      id: '3',
-      name: 'fubarTeam',
-      sport: 'fubarsport',
-      level: 'pro',
-      playerId: ['4'],
-    };
-    return {
-      id: fubarinfo.id,
-      name: fubarinfo.name,
-      sport: fubarinfo.sport,
-      level: fubarinfo.sport,
-      players: fubarinfo.playerId.map(function (pId) {
-        return PlayerService.getPlayerInfo(pId);
-      }),
-    };
+  getTeamInfo(idTeam: string): TEAM {
+    let team = this.teams.find((team) => {
+      team.id == idTeam;
+    });
+    if (team == undefined) {
+      throw new Error('team undefined');
+    }
+    return team;
   }
 }

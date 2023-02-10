@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TournRegisterService } from './tourn-register.service';
+import { RegisterService } from './register.service';
 
-describe('TournRegisterService', () => {
-  let service: TournRegisterService;
+describe('RegisterService', () => {
+  let service: RegisterService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TournRegisterService);
+    service = TestBed.inject(RegisterService);
   });
 
   it('should be created', () => {

@@ -1,24 +1,38 @@
 import { Injectable } from '@angular/core';
 
+export interface PLAYER {
+  id: string;
+  name: string;
+  lastname: string;
+  sport: string;
+  level: string;
+}
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerService {
+  
+  players?: PLAYER[];
+
   constructor() {}
 
-  static getPlayerInfo(id: string): {
-    id: string;
-    name: string;
-    lastname: string;
-    sport: string;
-    level: string;
-  } {
-    return {
-      id: '4',
-      name: 'jhon',
-      lastname: 'string',
-      sport: 'fubarSport',
-      level: 'pro',
-    };
+  getPlayerInfo(idPlayer: string): PLAYER {
+    let player = this.players?.find((player) => {
+      player.id == idPlayer;
+    });
+    if (player == undefined) {
+      throw new Error('player undefined');
+    }
+    return player;
+  }
+
+  getPlayerName(idPlayer: string):string {
+    let player = this.players?.find((player) => {
+      player.id == idPlayer;
+    });
+    if (player == undefined) {
+      throw new Error('player undefined');
+    }
+    return player.name;
   }
 }
