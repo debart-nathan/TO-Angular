@@ -22,6 +22,7 @@ import { SelectFilteredComponent } from './select-filtered/select-filtered.compo
 import { EventsManagementComponent } from './events-management/events-management.component';
 import { TournsManagementComponent} from './tourns-managment/tourns-managment.component';
 import { MatchsManagmentComponent } from './matchs-managment/matchs-managment.component';
+import { EventManagementComponent } from './event-management/event-management.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatchsManagmentComponent } from './matchs-managment/matchs-managment.co
     EventsManagementComponent,
     TournsManagementComponent,
     MatchsManagmentComponent,
+    EventManagementComponent,
 
   ],
   imports: [
@@ -50,11 +52,11 @@ import { MatchsManagmentComponent } from './matchs-managment/matchs-managment.co
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: 'stage-creation', component: StageCreationComponent },
-      { path: 'tourn-inscription', component:TournInscriptionComponent },
-      { path: 'events-management', component: EventsManagementComponent },
-      { path: 'tourns-management', component: TournsManagementComponent},
-      { path: 'matchs-management', component: MatchsManagmentComponent}
+      { path: 'evenement/:idEvent/tournoi/:idTourn/stage-creation', component: StageCreationComponent },
+      { path: 'evenement/:idEvent/tournoi/:idTourn/inscription', component:TournInscriptionComponent },
+      { path: 'gestionnaire-evenements', component: EventsManagementComponent },
+      { path: 'gestionnaire-tournois', component: TournsManagementComponent},
+      { path: 'gestionnaire-matchs', component: MatchsManagmentComponent}
     ]),
     BrowserAnimationsModule,
   ],

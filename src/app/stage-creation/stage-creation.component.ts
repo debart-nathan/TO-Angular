@@ -18,7 +18,7 @@ export class StageCreationComponent {
   chosenFormulaIndex: number = -1;
   isChosenFormula: boolean = false;
 
-  teams: { id: number; name: string }[][];
+  teams: { id: string; name: string }[][];
   isReadyPools: boolean = false;
   pools: { oldPool_num: number; oldTeam_num: number }[][] | undefined;
 

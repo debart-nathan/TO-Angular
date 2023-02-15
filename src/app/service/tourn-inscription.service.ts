@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { PlayerService, PLAYER } from './player.service';
 import { RegisterService } from './register.service';
 import { TeamService, TEAM } from './teams.service';
@@ -22,10 +23,11 @@ export class TournInscriptionService {
   constructor(
     private registerS: RegisterService,
     private teamS: TeamService,
-    private playerS: PlayerService
+    private playerS: PlayerService,
+    private route: ActivatedRoute
   ) {
-    this.idEvent = '';
-    this.idTourn = '';
+    this.idEvent = this.route.snapshot.params['idEvent'];
+    this.idTourn = this.route.snapshot.params['idTourn'];
   }
 
   getTeamsDisplayString(): string[] {

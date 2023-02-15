@@ -22,9 +22,9 @@ export class MatchService {
   constructor() {}
 
   static createMatch(
-    poolId: number,
-    teamAid: number,
-    teamBid: number,
+    poolId: string,
+    teamAid: string,
+    teamBid: string,
     nR: number | null | undefined,
     pWin: number | null | undefined
   ) {

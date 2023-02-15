@@ -3,31 +3,32 @@ import { Injectable } from '@angular/core';
 import { UtilityFuncService } from './utility-func.service';
 import { PoolService } from './pool.service';
 import { MatchService } from './match.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StageService {
   //TODO remove brut declaration and replace by apropriate request
-  registeredTeams: { id: number; name: string }[][];
-  tournId: number;
+  registeredTeams: { id: string; name: string }[][];
+  idTourn: string;
 
-  constructor(private utilityFuncS: UtilityFuncService) {
-    //TODO set the route to get the tournId (tournid in the url)
-    this.tournId=0;
+  constructor(private utilityFuncS: UtilityFuncService,private route: ActivatedRoute) {
+
+    this.idTourn=this.route.snapshot.params['idTourn'];
     //TODO check last stage of tourn finished (connect to the CRUD API)
     
     //TODO get Team for next stage of tourn (connect to the CRUD API)
     this.registeredTeams = [
       [
-        { id: 1, name: 'test1-1' },
-        { id: 2, name: 'test1-2' },
-        { id: 3, name: 'test1-3' },
+        { id: '1', name: 'test1-1' },
+        { id: '2', name: 'test1-2' },
+        { id: '3', name: 'test1-3' },
       ],
       [
-        { id: 4, name: 'test2-1' },
-        { id: 5, name: 'test2-2' },
-        { id: 6, name: 'test2-3' },
+        { id: '4', name: 'test2-1' },
+        { id: '5', name: 'test2-2' },
+        { id: '6', name: 'test2-3' },
       ],
     ];
     this.registeredTeams.forEach((pool) => {
@@ -145,8 +146,8 @@ export class StageService {
     //TODO add auth check
     //create pools and associated matches
     pools?.forEach(pool=>{
-      let poolId: number = PoolService.createPool(
-        this.tournId,
+      let poolId: string = PoolService.createPool(
+        this.idTourn,
         proprieties.topCut
       );
       for(let i=0;i<pool.length-1;i++){

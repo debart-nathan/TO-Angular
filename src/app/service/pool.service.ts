@@ -7,7 +7,7 @@ export class PoolService {
   getPool(idPool: string): { stage: number; idTourn: string; } {
     throw new Error('Method not implemented.');
   }
-  static createPool(tournId: number, topCut: number | null | undefined): number {
+  static createPool(tournId: string, topCut: number | null | undefined): string {
     throw new Error('Method not implemented.');
   }
 
