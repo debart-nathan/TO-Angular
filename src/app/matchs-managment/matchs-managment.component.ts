@@ -9,11 +9,11 @@ import {
 } from '../service/matchs-management.service';
 
 @Component({
-  selector: 'app-match-managment',
-  templateUrl: './match-managment.component.html',
-  styleUrls: ['./match-managment.component.scss'],
+  selector: 'app-matchs-managment',
+  templateUrl: './matchs-managment.component.html',
+  styleUrls: ['./matchs-managment.component.scss'],
 })
-export class MatchManagmentComponent {
+export class MatchsManagmentComponent {
   activeMatchList: MatTableDataSource<MANAGED_MATCH>;
   closedMatchList: MatTableDataSource<MANAGED_MATCH>;
   closedToggle = false;
