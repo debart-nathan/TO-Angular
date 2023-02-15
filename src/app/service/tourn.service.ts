@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 export interface TOURN {
   id:string,
+  idEvent:string;
   name:string,
   sport:string,
   level:string,
@@ -17,7 +18,8 @@ export class TournService {
 
   constructor() {
     this.tourns = [{
-      id: "3", 
+      id: "3",
+      idEvent: "", 
       name: "foobar",
       sport: "something",
       level: "something",

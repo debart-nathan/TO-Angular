@@ -1,0 +1,238 @@
+<div name="aEventL">
+  <div class="">
+    <form>
+      <input (keyup)="applyFilterActive($event.target)" placeholder="Filtre" />
+    </form>
+  </div>
+
+  <mat-table #activeTable [dataSource]="activeMatchList">
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button class="w-full h-full rounded-none button-primary">Édit</button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="idMatch">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> id. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="idEvent">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        id : Tournoi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.idEvent }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nameEvent">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        nom : Éventement
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.nameEvent }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="idTourn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        id : Tournoi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.idTourn }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nameTourn">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        nom : Tournoi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.nameTourn }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="stage">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        stage du Tournoi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.stage }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="idPool">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        id : Poule
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.idPool }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="idTeamA">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        id : Équipe A
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.idTeamA }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nameTeamA">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        nom : Équipe A
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.nameTeamA }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="idTeamB">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        id : Équipe B
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.idTeamB }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="nameTeamB">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        nom : Équipe B
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.nameTeamB }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        role
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.role }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumnsA"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumnsA"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    #activePaginator
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="true"
+  >
+  </mat-paginator>
+</div>
+<div name="cEventL">
+  <button class="button-primary" (click)="closedToggle = !closedToggle">
+    Montrer l'Historique
+  </button>
+  <div *ngIf="closedToggle">
+    <div class="">
+      <form>
+        <input
+          (keyup)="applyFilterActive($event.target)"
+          placeholder="Filtre"
+        />
+      </form>
+    </div>
+    <mat-table #activeTable [dataSource]="closedMatchList">
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button class="w-full h-full rounded-none button-primary">
+            Édit
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="idMatch">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id.
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="idEvent">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id : Tournoi
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.idEvent }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nameEvent">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          nom : Éventement
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nameEvent }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="idTourn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id : Tournoi
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.idTourn }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nameTourn">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          nom : Tournoi
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nameTourn }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="stage">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          stage du Tournoi
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.stage }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="idPool">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id : Poule
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.idPool }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="winner">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Winner
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div
+            *ngIf="element.idWin == element.idTeamA; then winA; else winB"
+          ></div>
+          <ng-template #winA>Équipe A</ng-template>
+          <ng-template #winB>Équipe B</ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="idTeamA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id : Équipe A
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.idTeamA }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nameTeamA">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          nom : Équipe A
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nameTeamA }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="idTeamB">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          id : Équipe B
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.idTeamB }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nameTeamB">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          nom : Équipe B
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nameTeamB }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          role
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.role }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsC"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsC"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      #activePaginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
+</div>

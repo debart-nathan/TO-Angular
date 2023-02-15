@@ -21,6 +21,7 @@ import { TournInscriptionComponent } from './tourn-inscription/tourn-inscription
 import { SelectFilteredComponent } from './select-filtered/select-filtered.component';
 import { EventsManagementComponent } from './events-management/events-management.component';
 import { TournsManagementComponent} from './tourns-managment/tourns-managment.component';
+import { MatchManagmentComponent } from './match-managment/match-managment.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { TournsManagementComponent} from './tourns-managment/tourns-managment.co
     SelectFilteredComponent,
     EventsManagementComponent,
     TournsManagementComponent,
+    MatchManagmentComponent,
 
   ],
   imports: [
@@ -51,7 +53,8 @@ import { TournsManagementComponent} from './tourns-managment/tourns-managment.co
       { path: 'stage-creation', component: StageCreationComponent },
       { path: 'tourn-inscription', component:TournInscriptionComponent },
       { path: 'events-management', component: EventsManagementComponent },
-      { path: 'tourns-management', component: TournsManagementComponent}
+      { path: 'tourns-management', component: TournsManagementComponent},
+      { path: 'match-management', component: MatchManagmentComponent}
     ]),
     BrowserAnimationsModule,
   ],
