@@ -18,11 +18,11 @@
     @apply flex justify-center items-center;
   }
 
-  .hOutline-default :hover{
+  .hOutline-default:hover{
     @apply hover:outline-cyan-500 hover:outline hover:outline-4
   }
 
-  .fOutline-default :focus{
+  .fOutline-default:focus{
     @apply focus:outline-cyan-500 focus:outline focus:outline-4
   }
 
