@@ -3,10 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
-import {
-  EventsManagementService,
-  MANAGED_EVENT,
-} from '../service/events-management.service';
+import { EventsManagementService } from '../service/events-management.service';
+import { MANAGED_EVENT } from '../interface-repos';
 
 @Component({
   selector: 'app-events-management',
@@ -18,7 +16,7 @@ export class EventsManagementComponent {
   closedEventList: MatTableDataSource<MANAGED_EVENT>;
   closedToggle = false;
 
-  displayedColumns = ['edit','idEvent', 'name', 'role', 'date', 'location'];
+  displayedColumns = ['edit', 'idEvent', 'name', 'role', 'date', 'location'];
 
   @ViewChild(MatPaginator)
   activePaginator!: MatPaginator;

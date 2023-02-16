@@ -3,10 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
-import {
-  MatchsManagementService,
-  MANAGED_MATCH,
-} from '../service/matchs-management.service';
+import { MatchsManagementService } from '../service/matchs-management.service';
+import { MANAGED_MATCH } from '../interface-repos';
 
 @Component({
   selector: 'app-matchs-managment',
@@ -31,7 +29,7 @@ export class MatchsManagmentComponent {
     'nameTeamA',
     'idTeamB',
     'nameTeamB',
-    'role'
+    'role',
   ];
 
   displayedColumnsC = [
@@ -49,7 +47,6 @@ export class MatchsManagmentComponent {
     'idTeamB',
     'nameTeamB',
     'role',
-    
   ];
 
   @ViewChild(MatPaginator)

@@ -1,19 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { RoleAuthService } from './role-auth.service';
-import { MatchService, MATCH } from './match.service';
+import { MatchService } from './match.service';
 import { PoolService } from './pool.service';
 import { TournService } from './tourn.service';
 import { EventService } from './event.service';
+import { MANAGED_MATCH,MATCH } from '../interface-repos';
 
-export interface MANAGED_MATCH extends MATCH {
-  idEvent: string;
-  nameEvent: string;
-  idTourn: string;
-  nameTourn: string;
-  stage: number;
-  role: string;
-}
+
 
 @Injectable({
   providedIn: 'root',

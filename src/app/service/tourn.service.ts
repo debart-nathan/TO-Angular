@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface TOURN {
-  id:string,
-  idEvent:string;
-  name:string,
-  sport:string,
-  level:string,
-  active:boolean,
-  pools:string[]
-};
+import { TOURN } from '../interface-repos';
 @Injectable({
   providedIn: 'root',
 })

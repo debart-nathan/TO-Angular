@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 
-const mockRoleEvList=[{ id: "1", eventId: "3", role: "testrole" }]
+const mockRoleEvList=[{ id: "1", idEvent: "3", role: "testrole" }]
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoleAuthService {
+ 
   roleMatchList: {
     id: string;
     parentId: string;
-    matchId: string;
+    idMatch: string;
     role: string;
   }[] = [];
   roleTournList: {
     id: string;
     parentId: string;
-    tournId: string;
+    idTourn: string;
     role: string;
   }[] = [];
-  roleEventList: { id: string; eventId: string; role: string }[] = [];
+  roleEventList: { id: string; idEvent: string; role: string }[] = [];
   constructor() {
     //todo set the get request
     this.roleEventList=mockRoleEvList
@@ -27,7 +28,7 @@ export class RoleAuthService {
   getRoleMatchList(): { id: string; role: string }[] {
     return this.roleMatchList.map((rM) => {
       return {
-        id: rM.matchId,
+        id: rM.idMatch,
         role: rM.role,
       };
     });
@@ -35,7 +36,7 @@ export class RoleAuthService {
   getRoleTournList(): { id: string; role: string }[] {
     return this.roleTournList.map((rT) => {
       return {
-        id: rT.tournId,
+        id: rT.idTourn,
         role: rT.role,
       };
     });
@@ -43,10 +44,19 @@ export class RoleAuthService {
   getRoleEventList(): { id: string; role: string }[] {
     return this.roleEventList.map((rE) => {
       return {
-        id: rE.eventId,
+        id: rE.idEvent,
         role: rE.role,
       };
     });
+  }
+  getRoleTourn(id: string): string {
+    let role = this.roleTournList.find((tourn)=>{
+      return tourn.idTourn=id;
+    })
+    if(role==undefined){
+      return ""
+    }
+    return role.role;
   }
 
   canEditEvent(idEv: string): boolean {

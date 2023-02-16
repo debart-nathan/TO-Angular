@@ -1,16 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { RoundService } from './round.service';
+import { MATCH } from '../interface-repos';
 
-export interface MATCH {
-  id: string;
-  idPool: string;
-  idTeamA: string;
-  idTeamB: string;
-  idWin: string;
-  roundTWin: number;
-  idrounds:string[]
-}
 
 @Injectable({
   providedIn: 'root',

@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
+import { EVENT } from '../interface-repos';
 
-export interface EVENT {
-  id: string;
-  name: string;
-  location: string;
-  date: Date;
-  idTourns: string[];
-}
 
 @Injectable({
   providedIn: 'root',

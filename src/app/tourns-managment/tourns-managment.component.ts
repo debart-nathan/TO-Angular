@@ -3,10 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
-import {
-  TournsManagementService,
-  MANAGED_TOURN,
-} from '../service/tourns-management.service';
+import { TournsManagementService } from '../service/tourns-management.service';
+import { MANAGED_TOURN } from '../interface-repos';
 
 @Component({
   selector: 'app-events-management',

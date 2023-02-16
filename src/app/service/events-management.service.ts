@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { RoleAuthService } from './role-auth.service';
-import { EventService, EVENT } from './event.service';
+import { EventService } from './event.service';
+import { MANAGED_EVENT } from '../interface-repos';
 
-export interface MANAGED_EVENT extends EVENT {
-  role: string;
-}
 
 @Injectable({
   providedIn: 'root',

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { RoleAuthService } from './role-auth.service';
-import { TournService, TOURN } from './tourn.service';
+import { TournService } from './tourn.service';
+import { MANAGED_TOURN } from '../interface-repos';
 
-export interface MANAGED_TOURN extends TOURN {
-  role: string;
-}
 
 @Injectable({
   providedIn: 'root'
